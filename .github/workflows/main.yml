@@ -36,8 +36,8 @@ jobs:
     steps:
       - name: Run
         run: |
-          echo "tyoe: ${{ github.event.inputs.type }}"
-          echo "To cluster: ${{ github.event.inputs.name }}" 
+          echo "environment: ${{ github.event.inputs.environment }}"
+          echo "name: ${{ github.event.inputs.name }}" 
 
   # This workflow contains a single job called "provision"
   provision:

@@ -2,7 +2,7 @@
 
 # This is a basic workflow to help you get started with Actions
 
-name: provision
+name: main
 
 # Controls when the workflow will run
 on:
@@ -52,15 +52,15 @@ jobs:
         with:
           path: main
 
+      - name: ls fleet
+        run: |
+          ls -la main
+
       - name: checkout flux
         uses: actions/checkout@v4
         with:
           repository: bplasmeijer/component.flux-system
           path: flux
-
-      - name: ls fleet
-        run: |
-          ls -la main
 
       - name: ls flux
         run: |
@@ -79,9 +79,9 @@ jobs:
           export ENVIRONMENT="${{ github.event.inputs.environment }}"
           export NAME="${{ github.event.inputs.name }}"
 
-          ./scripts/kind.sh 
+          ./main/scripts/kind.sh 
 
       # delete kind test cluster
       - name: delete-kind
         run: |
-          ./scripts/cleanup.sh 
+          ./main/scripts/cleanup.sh 

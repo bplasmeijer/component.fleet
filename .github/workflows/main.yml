@@ -29,9 +29,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-
   check-variables:
-
     runs-on: ubuntu-latest
     steps:
       - name: Run
@@ -49,16 +47,41 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: checkout fleet
+        uses: actions/checkout@v4
+        with:
+          path: main
 
-      # Runs a set of commands using the runners shell
-      - name: Run
+      - name: checkout flux
+        uses: actions/checkout@v4
+        with:
+          repository: bplasmeijer/component.flux-system
+          path: flux
+
+      - name: ls fleet
+        run: |
+          ls -la main
+
+      - name: ls flux
+        run: |
+          ls -la flux
+  
+      - name: install flux
+        run: |
+          curl -s https://fluxcd.io/install.sh | sudo FLUX_VERSION=0.37.0 bash
+      
+      # make kind test cluster
+      - name: create-kind
         run: |
           echo "environment: ${{ github.event.inputs.environment }}"
           echo "name: ${{ github.event.inputs.name }}" 
-
  
           export ENVIRONMENT="${{ github.event.inputs.environment }}"
           export NAME="${{ github.event.inputs.name }}"
 
-          ./scripts/provision.sh 
+          ./scripts/kind.sh 
+
+      # delete kind test cluster
+      - name: delete-kind
+        run: |
+          ./scripts/cleanup.sh 

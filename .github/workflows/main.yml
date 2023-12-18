@@ -22,6 +22,8 @@ on:
         type: choice
         options:
           - shared
+          - ch
+          - xmcloud
         default: 'shared'
       name:
         description: 'name'     

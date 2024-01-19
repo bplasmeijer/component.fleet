@@ -18,7 +18,7 @@ jobs:
       - name: Update Helm repo
         run: helm repo update
       - name: Check for new version
-        uses: helm/chart-releaser-action@v2.3.0
+        uses: helm/chart-releaser-action@latest
         with:
           chart: stable/nginx
           owner: bplasmeijer

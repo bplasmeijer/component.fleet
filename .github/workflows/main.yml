@@ -25,6 +25,22 @@ on:
           - ch
           - xmcloud
         default: 'shared'
+      region:
+        description: 'region'     
+        required: true
+        type: choice
+        options:
+          - westeurope
+          - eastus
+        default: 'westeurope'
+      typeof:
+        description: 'typeof'     
+        required: true
+        type: choice
+        options:
+          - blue
+          - green
+        default: 'blue'
       name:
         description: 'name'     
         required: true

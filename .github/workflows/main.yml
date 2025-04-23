@@ -34,7 +34,7 @@ on:
           - euw
           - use
         default: 'euw'
-      typeof:
+      network:
         description: 'typeof'     
         required: true
         type: choice
@@ -42,13 +42,14 @@ on:
           - internal
           - external
         default: 'internal'
-      name:
-        description: 'name'     
+      bluegreen:
+        description: 'typeof'     
         required: true
         type: choice
         options:
-          - "${{ github.event.inputs.region }}-e1-${{ github.event.inputs.typeof }}-${{ github.event.inputs.environment }}-blue"
-          - "${{ github.event.inputs.region }}-e1-${{ github.event.inputs.typeof }}-${{ github.event.inputs.environment }}-green"
+          - blue
+          - green
+        default: 'blue'        
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -58,7 +59,7 @@ jobs:
       - name: Run
         run: |
           echo "environment: ${{ github.event.inputs.environment }}"
-          echo "name: ${{ github.event.inputs.name }}" 
+          echo "name: ${{ github.event.inputs.region }}-${{ github.event.inputs.network }}-aks-${{ github.event.inputs.bluegreen }}" 
 
   # This workflow contains a single job called "provision"
   provision:

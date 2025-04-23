@@ -25,7 +25,7 @@ on:
           - unified
           - ch
           - xmcloud
-        default: 'shared'
+        default: 'unified'
       region:
         description: 'region'     
         required: true
@@ -47,8 +47,8 @@ on:
         required: true
         type: choice
         options:
-          - ${{ github.event.inputs.region }}-e1-${{ github.event.inputs.typeof }}-${{ github.event.inputs.environment }}-blue
-          - ${{ github.event.inputs.region }}-e1-${{ github.event.inputs.typeof }}-${{ github.event.inputs.environment }}-green
+          - "${{ github.event.inputs.region }}-e1-${{ github.event.inputs.typeof }}-${{ github.event.inputs.environment }}-blue"
+          - "${{ github.event.inputs.region }}-e1-${{ github.event.inputs.typeof }}-${{ github.event.inputs.environment }}-green"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
